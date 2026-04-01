@@ -58,6 +58,7 @@
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/873b265edfc7f100aa476a82d2a1d865" "")
 ; (gtk_accel_path "<Actions>/ThunarShortcutsPane/sendto-shortcuts" "<Primary>d")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/undo" "<Primary>z")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/ead498a05d9dee54c80194d25af4e028" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/toggle-sort-order" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/view-location-selector-entry" "")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/paste" "<Primary>v")
