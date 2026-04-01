@@ -1,0 +1,69 @@
+#!/bin/sh
+
+logfile="${HOME}/.local/share/xorg/dkrc.log"
+[ ! -d "${HOME}/.local/share/xorg" ] && logfile="${HOME}/.dkrc.log"
+: >"$logfile"
+
+# Kill already running process
+# _ps=(picom dunst xfce-polkit xfce4-power-manager)
+# for _prs in "${_ps[@]}"; do
+#	if [[ `pidof ${_prs}` ]]; then
+#		killall -9 ${_prs}
+#	fi
+# done
+
+# autostart
+export DESKTOP_SESSION=dk
+
+# Fix cursor
+xsetroot -cursor_name left_ptr
+
+# Polkit agent
+# /usr/lib/xfce-polkit/xfce-polkit &
+# /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+dunst -config ~/.config/dk/dunst/dunstrc &
+
+# picom --config ~/.config/dk/picom/picom.conf --animations -b &
+
+hsetroot -cover ~/.dotfiles/pictures/wallhaven-lyq2rq_3440x1440.png &
+
+if hash sxhkd >/dev/null 2>&1; then
+  pkill sxhkd
+  sleep 0.5
+  sxhkd -c "$HOME/.config/dk/sxhkd/sxhkdrc" &
+fi
+
+~/.config/dk/polybar/polybar-dk &
+
+{
+  dkcmd set numws=10
+  dkcmd set ws=_ apply layout=spiral master=1 stack=3 gap=10 msplit=0.5 ssplit=0.5
+  echo "spiral" >/tmp/dk-current-layout
+
+  dkcmd set focus_open=true focus_urgent=true focus_mouse=true
+  dkcmd set tile_tohead=0 tile_hints=false
+  dkcmd set win_minwh=50 win_minxy=10
+  dkcmd set smart_gap=false smart_border=false
+  dkcmd set mouse mod=super move=button1 resize=button3
+  dkcmd set border width=2 outer_width=1 colour focus='#e78a4e' unfocus='#1d2021' urgent='#ee5555' outer_focus='#e78a4e' outer_unfocus='#1d2021' outer_urgent='#ee5555'
+
+  # window rules
+  dkcmd rule class="^alacritty$" ws=1 focus=true
+  dkcmd rule class="^librewolf$" ws=2 focus=true
+  dkcmd rule class="^pcmanfm$" ws=3 focus=true
+  # dkcmd rule class="^github desktop$" ws=2 focus=true
+  dkcmd rule class="^(pavucontrol|transmission-gtk|qimgv|galculator|mpv|st|lxappearance)$" float=true w=1280 h=720 x=center y=center stick=true
+  dkcmd rule class="^scratchpad$" float=true stick=true x=center y=center
+  # dkcmd rule class="^pulsemixer$" float=true stick=true x=center y=center
+  dkcmd rule class="^stickyterm$" stick=true float=true w=1280 h=720
+  dkcmd rule apply '*'
+} >>"$logfile" 2>&1
+
+if grep -q 'error:' "$logfile"; then
+  hash notify-send && notify-send -t 0 -u critical "dkrc has errors" \
+    "$(awk '/error:/ {sub(/^error: /, ""); gsub(/</, "\<"); print}' "$logfile")"
+  exit 1
+fi
+
+exit 0

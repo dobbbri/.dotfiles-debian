@@ -1,0 +1,42 @@
+#!/bin/bash
+
+LOW_LEVEL=25
+CRITICAL_LEVEL=5
+HIBERNATE_LEVEL=3
+
+LEVEL=$(cat /sys/class/power_supply/BAT0/capacity)
+STATUS=$(cat /sys/class/power_supply/BAT0/status)
+
+hibernate() {
+  notify-send -a "Battery" "Hibernating!" -u critical
+
+  # Give some time to plug the power in
+  sleep 5
+
+  # Hibernate if still discharging
+  STATUS=$(cat /sys/class/power_supply/BAT0/status)
+  if [[ "$STATUS" = "Discharging" ]]; then
+    systemctl hibernate
+  else
+    notify-send -a "Battery" "Power was plugged in. Hibernation is cancelled!"
+  fi
+}
+
+notify_critical() {
+  notify-send -a "Battery" "Battery is critically low!" -u critical
+}
+
+notify_low() {
+  notify-send -a "Battery" "Battery is low!"
+}
+
+
+if [[ "$STATUS" = "Discharging" ]]; then
+  if [[ "$LEVEL" -le "$HIBERNATE_LEVEL" ]]; then
+    hibernate
+  elif [[ "$LEVEL" -le "$CRITICAL_LEVEL" ]]; then
+    notify_critical
+  elif [[ "$LEVEL" -le "$LOW_LEVEL" ]]; then
+    notify_low
+  fi
+fi

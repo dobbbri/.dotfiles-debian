@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Simple scratchpad for dk
+
+APP="${1:-scratchpad}"
+CMD="${2:-}"
+CLASS="$APP"
+
+# Terminal command
+if [ -n "$CMD" ]; then
+    TERM="st -c $CLASS -e $CMD"
+else
+    TERM="st -c $CLASS"
+fi
+
+# Check if exists
+id=$(xdotool search --class "$CLASS" | head -1)
+
+if [ -z "$id" ]; then
+    # Create - dk rules handle positioning
+    $TERM &
+else
+    # Toggle
+    if xdotool search --onlyvisible --class "$CLASS" >/dev/null; then
+        xdotool windowunmap "$id"
+    else
+        xdotool windowmap "$id"
+        xdotool windowactivate "$id"
+    fi
+fi

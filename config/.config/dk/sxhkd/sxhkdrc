@@ -1,0 +1,227 @@
+# Launch Web Browser (Firefox)
+super + w
+	librewolf
+
+# Launch Web Browser (Firefox)
+super + shift + w
+	firefox-esr
+
+# Launch Terminal (st)
+super + t
+	alacritty
+
+# Launch Terminal (alacritty)
+super + Return
+  st	
+
+# Launch Rofi Application Menu
+super + space
+   	~/.config/rofi/launchers/type-2/launcher.sh
+
+# Show Keybinding Help Script
+super + h
+	~/.config/dk/scripts/help
+
+# Launch File Manager (Thunar)
+super + f
+	pcmanfm
+
+# Launch Text Editor (Geany)
+super + e
+	geany
+
+# Launch dmenu
+super + p
+	dmenu_run
+
+# Toggle Scratchpad Terminal
+super + shift + Return
+  ~/.config/dk/scripts/scratchpad
+
+# Launch Pulsemixer in Scratchpad
+super + v
+  ~/.config/dk/scripts/scratchpad pulsemixer pulsemixer
+
+# Increase Volume (Custom Script)
+alt + {equal,minus,m}
+  ~/.config/dk/scripts/changevolume {up,down,mute}
+
+# Decrease Volume (Custom Script)
+# alt + minus 
+# 	~/.config/dk/scripts/changevolume down
+#
+# # Mute Volume (Custom Script)
+# alt + m
+# 	~/.config/dk/scripts/changevolume mute
+
+# Mute Volume (Custom Script)
+XF86AudioMute	
+  amixer set Master toggle
+
+# Increase Volume (Using amixer)
+XF86AudioRaiseVolume
+	amixer set Master 5%+
+
+# Decrease Volume (Using amixer)
+XF86AudioLowerVolume
+	amixer set Master 5%-
+
+# Increase Screen Brightness
+XF86MonBrightnessUp
+	brightnessctl -c backlight set +5%
+
+# Decrease Screen Brightness
+XF86MonBrightnessDown
+	brightnessctl -c backlight set 5%-
+
+# Take a Screenshot (Region Select)
+super + shift + s
+	flameshot gui --path ~/Screenshots/
+
+# Take a Fullscreen Screenshot
+super + s
+	flameshot full --path ~/Screenshots/
+
+# Reload sxhkd (Hotkey Daemon)
+super + Escape
+	pkill -USR1 -x sxhkd;notify-send 'sxhkd' 'Reloaded config'
+
+# Restart dk Window Manager
+super + shift + r
+	dkcmd restart; notify-send 'dk' 'Restarted'
+
+# Quit dk (Exit Window Manager)
+super + shift + q
+	dkcmd exit
+
+# Close Focused Window
+super + q
+	dkcmd win kill
+
+# Cycle Through Windows
+super + Tab
+	dkcmd win cycle
+
+# Toggle Floating Mode
+super + shift + space
+	dkcmd win float
+
+# Toggle Sticky Mode (Window on All Workspaces)
+super + shift + s
+	dkcmd win stick
+
+# Focus Next Window
+super + Right
+	dkcmd win focus next
+
+# Focus Previous Window
+super + Left
+	dkcmd win focus prev
+
+# Move Window Up in Stack
+super + shift + Right
+	dkcmd win mvstack up
+
+# Move Window Down in Stack
+super + shift + Left
+	dkcmd win mvstack down
+
+# Resize Window: Shrink Width
+super + alt + Left
+	dkcmd win resize w=-20
+
+# Resize Window: Grow Height
+super + alt + Up
+	dkcmd win resize h=+20
+
+# Resize Window: Shrink Height
+super + alt + Down
+	dkcmd win resize h=-20
+
+# Resize Window: Grow Width
+super + alt + Right
+	dkcmd win resize w=+20
+
+# Switch to Workspace 1-10
+super + {1-9,0}
+	dkcmd ws view {1-9,10}
+
+# Move Window to Workspace 1-10
+super + shift + {1-9,0}
+	dkcmd ws send {1-9,10}
+
+# Move Window to Workspace and Follow 1-10
+super + ctrl + {1-9,0}
+	dkcmd ws follow {1-9,10}
+
+# Increase Number of Master Windows
+super + i
+	dkcmd set master +1
+
+# Decrease Number of Master Windows
+super + d
+	dkcmd set master -1
+
+# Increase Number of Stack Windows
+super + shift + i
+	dkcmd set stack +1
+
+# Decrease Number of Stack Windows
+super + shift + d
+	dkcmd set stack -1
+
+# Increase Gap Width
+super + equal
+	dkcmd set gap +5
+
+# Decrease Gap Width
+super + minus
+	dkcmd set gap -5
+
+# Increase Border Width
+super + ctrl + equal
+	dkcmd set border width +1
+
+# Decrease Border Width
+super + ctrl + minus
+	dkcmd set border width -1
+
+# Increase Outer Border Width
+super + ctrl + shift + equal
+	dkcmd set border outer_width +1
+
+# Decrease Outer Border Width
+super + ctrl + shift + minus
+	dkcmd set border outer_width -1
+
+# Switch to Tile Layout
+ctrl + shift + 1
+	dkcmd set layout tile && echo "tile" > /tmp/dk-current-layout && notify-send "Layout" "Switched to Tile"
+
+# Switch to Right Tile Layout  
+ctrl + shift + 2
+	dkcmd set layout rtile && echo "rtile" > /tmp/dk-current-layout && notify-send "Layout" "Switched to Right Tile"
+
+# Switch to Monocle Layout
+ctrl + shift + 3
+	dkcmd set layout mono && echo "mono" > /tmp/dk-current-layout && notify-send "Layout" "Switched to Monocle"
+
+# Switch to Grid Layout
+ctrl + shift + 4
+	dkcmd set layout grid && echo "grid" > /tmp/dk-current-layout && notify-send "Layout" "Switched to Grid"
+
+# Switch to Spiral Layout
+ctrl + shift + 5
+	dkcmd set layout spiral && echo "spiral" > /tmp/dk-current-layout && notify-send "Layout" "Switched to Spiral"
+
+# Switch to Dwindle Layout
+ctrl + shift + 6
+	dkcmd set layout dwindle && echo "dwindle" > /tmp/dk-current-layout && notify-send "Layout" "Switched to Dwindle"
+
+# Switch to None/Floating Layout
+ctrl + shift + 7
+	dkcmd set layout none && echo "none" > /tmp/dk-current-layout && notify-send "Layout" "Switched to Floating"
+
+# Shutdown or Reboot
+super + x
+	~/.config/rofi/powermenu/type-1/powermenu.sh

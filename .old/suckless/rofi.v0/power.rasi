@@ -1,0 +1,120 @@
+
+@theme "./themes/onedark.rasi"
+
+
+* {
+    bg: @bg-col;
+    background-color: @bg-col;
+    font: "JetBrainsMono Nerd Font 14";  
+}
+
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus";
+    location: 0;
+    display-drun: "Launch:";
+}
+
+window { 
+    width: 15%;
+    transparency: "real";
+    orientation: vertical;
+    border-radius: 10px;
+    border: 4px;
+    border-color: @border-col;
+    background-color: @bg-col;
+}
+
+mainbox {
+    background-color: @bg-col;
+    children: [inputbar, listview];
+}
+
+// ELEMENT
+// -----------------------------------
+
+element {
+    padding: 4 8;
+    text-color: @fg-col;
+    background-color: @bg-col;
+    border-radius: 5px;
+}
+
+element.selected {
+    text-color: @bg-col;
+    background-color: @selected-col;
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+element-icon {
+    size: 16 px;
+    background-color: inherit;
+    padding: 0 6 0 0;
+    alignment: vertical;
+}
+
+// element.selected.active {
+//     background-color: @bg-col;
+//     text-color: @fg-col;
+// }
+//
+// element.alternate.normal {
+//     background-color: @bg-col;
+//     text-color: @fg-col;
+// }
+//
+// element.alternate.active {
+//     background-color: @selected-col;
+//     text-color: @bg-col;
+// }
+
+element.selected.normal {
+    background-color: @selected-col;
+    text-color: @bg-col;
+}
+
+element.normal.active {
+    background-color: @bg-col;
+    text-color: @fg-col;
+}
+
+element.normal.normal {
+    background-color: @bg-col;
+    text-color: @fg-col;
+}
+
+element.normal.urgent {
+    background-color: #f25d78;
+    text-color: @bg-col;
+}
+
+listview {
+    columns: 1;  
+    lines: 4;
+    padding: 4 4;
+    fixed-height: true;
+    fixed-columns: true;
+    fixed-lines: true;
+    border: 0 10 6 10;
+}
+
+inputbar {
+    padding: 10 0 0;
+    margin: 0 0 0 0;
+}
+
+entry {
+    text-color: #f27893;
+    padding: 10 10 0 0;
+    margin: 0 -2 0 0;
+}
+
+prompt {
+    text-color: #78a9ff;
+    padding: 10 6 0 10;
+    margin: 0 -2 0 0;
+}

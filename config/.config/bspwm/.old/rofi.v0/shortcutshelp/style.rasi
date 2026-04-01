@@ -1,0 +1,103 @@
+
+/*****----- Global Properties -----*****/
+@import                          "../shared/colors.rasi"
+@import                          "../shared/fonts.rasi"
+
+/*****----- Main Window -----*****/
+
+configuration {
+    show-icons: true;
+    icon-theme: "Yaru";
+    location: 0;
+    display-drun: "Launch:";
+    background-color:            @background;
+}
+
+
+mainbox {
+    children: [inputbar, listview];
+    background-color:            @background;
+}
+
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       55%;
+    orientation:                 vertical;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    cursor:                      "default";
+    background-color:            @background;
+}
+// ELEMENT
+// -----------------------------------
+
+element {
+    padding: 4 8;
+    border-color:                @selected;
+    background-color:            @background;
+    text-color:                  @foreground;
+    border-radius: 0;
+}
+
+element.selected {
+   text-color:                  @foreground;
+   background-color:              @selected;
+}
+
+element-text {
+   background-color: inherit;
+   text-color: inherit;
+}
+
+element-icon {
+    size: 16 px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    padding: 0 6 0 0;
+    alignment: vertical;
+}
+
+listview {
+    columns: 1;  /* Show in a single column for better alignment */
+    lines: 18;
+    padding: 8 0;
+    fixed-height: true;
+    fixed-columns: true;
+    fixed-lines: true;
+    border: 0 10 6 10;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+inputbar {
+    padding: 10 0 0;
+    margin: 0 0 0 0;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+entry {
+    background-color:            transparent;
+    text-color:                    @selected;
+    padding: 10 10 0 0;
+    margin: 0 -2 0 0;
+}
+
+prompt {
+    background-color:            @background;
+    text-color:                  @foreground;
+    padding: 10 6 0 10;
+    margin: 0 -2 0 0;
+}

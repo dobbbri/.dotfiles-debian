@@ -1,0 +1,7 @@
+// most important ones. these keeps track of your open panes and files in the app
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+// Metadata Extractor generates these automatically, so you shouldn't sync them
+.obsidian/plugins/metadata-extractor/allExceptMd.json
+.obsidian/plugins/metadata-extractor/metadata.json
+.obsidian/plugins/metadata-extractor/tags.json

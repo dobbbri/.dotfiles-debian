@@ -1,0 +1,53 @@
+
+#in busen enviroment
+# geany .config/bunsen/enviroment
+# add
+# export GTK_IM_MODULE=cedilla
+
+#set click with 2 fingers like mouse right button, disable conky and clipman
+# geany .config/bunsen/autostart
+# and found the line 66:
+# synclient VertEdgeScroll=1 HorizEdgeScroll=1 TapButton1=1 2>/dev/null
+
+# and updated it like so
+## synclient VertEdgeScroll=1 HorizEdgeScroll=1 TapButton1=1 TapButton2=3 VertScrollDelta=-235 2>/dev/null
+## synclient VertEdgeScroll=1 HorizEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger2=3 ClickFinger3=2 HorizScrollDelta=-75 VertScrollDelta=-75 2>/dev/null
+
+# and found the line 99 comment like:
+## bl-conky-session &
+
+# and found the line 133 comment like:
+## xfce4-clipman &
+
+# and logout
+
+
+# baixar brave browser wezterm github-desktop
+
+# instalar nvm
+# curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+# source ~/.bashrc
+# nvm install --lts
+
+# install brave-browser
+# sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+# echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+#
+# install shiftkey-desktop
+# wget -qO - https://mirror.mwt.me/shiftkey-desktop/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/mwt-desktop.gpg >/dev/null
+# sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/mwt-desktop.gpg] https://mirror.mwt.me/shiftkey-desktop/deb/ any main" > rm/mwt-desktop.list'
+#
+# sudo apt update
+# sudo apt install brave-browser github-desktop
+
+# na pagina https://wezfurlong.org/wezterm/install/linux.html#installing-on-ubuntu-and-debian-based-systems e baixar o .deb
+# wget https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Debian11.deb
+# sudo apt install -y ./wezterm-20230712-072601-f4abf8fd.Debian11.deb
+# ln -s ~/Dotfiles/Linux/wezterm ~/.config/wezterm
+# wezterm --version
+
+# baixar bitwarden .deb
+# na pagina de Downloads, clicar e, Desktop App Installation Guides,
+# localizar o .deb
+# wget "https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=deb"
+

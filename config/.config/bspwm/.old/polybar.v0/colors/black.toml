@@ -1,0 +1,8 @@
+[colors]
+background=     #000000
+background-alt= #101010
+foreground=     #FFFFFF
+selected=       #62AEEF
+active=         #98C379
+urgent=         #E06B74
+

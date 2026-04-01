@@ -1,0 +1,125 @@
+  * {
+        bg: #1d2230;
+        background-color: @bg;
+    }
+
+    configuration {
+	    show-icons: true;
+	    icon-theme: "Breeze Dark";
+	    location: 0;
+	    font: "JetBrainsMono Nerd Font 14";	
+	    display-drun: "Launch:";
+    }
+
+    window { 
+	    width: 65%;
+	    transparency: "real";
+	    orientation: vertical;
+	    border-color: #005577;
+      border: 2px;
+      border-radius: 0; //10px;
+    }
+
+    mainbox {
+	    children: [inputbar, listview];
+    }
+
+
+    // ELEMENT
+    // -----------------------------------
+
+    element {
+	    padding: 4 12;
+	    text-color: #FFFFFF;
+        background-color: #1d2230;
+        border-radius: 5px;
+    }
+
+    element selected {
+	    text-color: #1a1a1a;
+	    background-color: #b3e5fc;
+    }
+
+    element-text {
+	    background-color: inherit;
+	    text-color: inherit;
+    }
+
+    element-icon {
+	    size: 32px;
+	    background-color: inherit;
+	    padding: 0 6 0 0;
+	    alignment: vertical;
+    }
+
+	element.selected.active {
+		background-color: #00141d;
+		text-color: #FFFFFF;
+	}
+ 
+	element.alternate.normal {
+		background-color: #1d2230;
+		text-color: #FFFFFF;
+	}
+
+ 
+	element.alternate.active {
+		background-color: #b3e5fc;
+		text-color: #1a1a1a;
+	}
+
+	element.selected.normal {
+		background-color: #005577;
+		text-color: #ffffff;
+	}
+ 
+
+	element.normal.active {
+		background-color: #1d2230;
+		text-color: #FFFFFF;
+	}
+ 
+
+	element.normal.normal {
+		background-color: #1d2230;
+		text-color: #FFFFFF;
+	}
+ 
+	element.normal.urgent {
+		background-color: #f25d78;
+		text-color: #1a1a1a;
+	}
+
+	
+
+    listview {
+	    columns: 2;
+	    lines: 9;
+	    padding: 8 0;
+	    fixed-height: true;
+	    fixed-columns: true;
+	    fixed-lines: true;
+	    border: 0 10 6 10;
+    }
+
+    // INPUT BAR 
+    //------------------------------------------------
+
+    entry {
+	    text-color: #f27893;
+	    padding: 10 10 0 0;
+	    margin: 0 -2 0 0;
+    }
+
+    inputbar {
+	    padding: 10 0 0;
+	    margin: 0 0 0 0;
+    } 
+
+    prompt {
+	    text-color: #78a9ff;
+	    padding: 10 6 0 10;
+	    margin: 0 -2 0 0;
+    }
+
+

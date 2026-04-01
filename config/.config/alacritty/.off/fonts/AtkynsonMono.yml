@@ -1,0 +1,14 @@
+font:
+  normal:
+    family: "AtkynsonMono Nerd Font"
+  bold:
+    family: "AtkynsonMono Nerd Font"
+  italic:
+    family: "AtkynsonMono Nerd Font"
+  size: 10.0
+  offset:
+    x: 0
+    y: 7
+  glyph_offset:
+    x: 0
+    y: 0

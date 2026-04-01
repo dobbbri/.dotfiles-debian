@@ -1,0 +1,128 @@
+#!/bin/bash
+# DK layout manager - display current layout and handle cycling
+
+# Layout file to track current layout
+LAYOUT_FILE="/tmp/dk-current-layout"
+
+# Define layout order for cycling
+LAYOUTS=("tile" "rtile" "spiral" "dwindle" "grid" "mono" "none")
+
+# Function to get layout info
+get_layout_info() {
+    local layout="$1"
+    case "$layout" in
+        "tile")    icon="󰙀"; name="Tile" ;;
+        "rtile")   icon="󱒅"; name="Right Tile" ;;  
+        "mono")    icon="󱟱"; name="Monocle" ;;
+        "grid")    icon="󰓰"; name="Grid" ;;
+        "spiral")  icon="󱒋"; name="Spiral" ;;
+        "dwindle") icon="󱒌"; name="Dwindle" ;;
+        "none")    icon="󰖲"; name="Floating" ;;
+        *)         icon="󱒋"; name="Spiral" ;;
+    esac
+}
+
+# Handle cycling if argument is provided
+if [ "$1" = "cycle" ]; then
+    # Get current layout
+    if [ -f "$LAYOUT_FILE" ]; then
+        current_layout=$(cat "$LAYOUT_FILE")
+    else
+        current_layout="spiral"
+    fi
+
+    # Find current layout index
+    current_index=-1
+    for i in "${!LAYOUTS[@]}"; do
+        if [[ "${LAYOUTS[$i]}" == "$current_layout" ]]; then
+            current_index=$i
+            break
+        fi
+    done
+
+    # Calculate next layout index (wrap around)
+    if [ $current_index -eq -1 ]; then
+        next_index=0
+    else
+        next_index=$(( (current_index + 1) % ${#LAYOUTS[@]} ))
+    fi
+
+    # Get next layout
+    next_layout="${LAYOUTS[$next_index]}"
+
+    # Apply the layout using dkcmd
+    dkcmd set layout "$next_layout"
+
+    # Update the layout file
+    echo "$next_layout" > "$LAYOUT_FILE"
+
+    # Show notification
+    get_layout_info "$next_layout"
+    notify-send "Layout Changed" "$name"
+    exit 0
+fi
+
+# Handle menu selection if argument is provided
+if [ "$1" = "menu" ]; then
+    # Get current layout for highlighting
+    if [ -f "$LAYOUT_FILE" ]; then
+        current_layout=$(cat "$LAYOUT_FILE")
+    else
+        current_layout="spiral"
+    fi
+
+    # Build menu options with icons and names
+    menu_options=""
+    for layout in "${LAYOUTS[@]}"; do
+        get_layout_info "$layout"
+        marker=""
+        if [ "$layout" = "$current_layout" ]; then
+            marker=" (current)"
+        fi
+        menu_options="$menu_options$icon $name$marker\n"
+    done
+
+    # Show rofi menu and get selection
+    selected=$(echo -e "$menu_options" | rofi -dmenu -i -p "Select Layout:" -line-padding 4 -hide-scrollbar -theme ~/.config/dk/rofi/keybinds.rasi | head -1)
+    
+    if [ -n "$selected" ]; then
+        # Extract layout name from selection
+        selected_name=$(echo "$selected" | sed 's/.* \([A-Za-z ]*\).*/\1/' | sed 's/ (current)//')
+        
+        # Find corresponding layout
+        selected_layout=""
+        for layout in "${LAYOUTS[@]}"; do
+            get_layout_info "$layout"
+            if [ "$name" = "$selected_name" ]; then
+                selected_layout="$layout"
+                break
+            fi
+        done
+        
+        if [ -n "$selected_layout" ]; then
+            # Apply the layout using dkcmd
+            dkcmd set layout "$selected_layout"
+            
+            # Update the layout file
+            echo "$selected_layout" > "$LAYOUT_FILE"
+            
+            # Show notification
+            get_layout_info "$selected_layout"
+            notify-send "Layout Changed" "$name"
+        fi
+    fi
+    exit 0
+fi
+
+# Default behavior: display current layout for polybar
+if [ -f "$LAYOUT_FILE" ]; then
+    layout=$(cat "$LAYOUT_FILE")
+else
+    # Default to spiral
+    layout="spiral"
+fi
+
+get_layout_info "$layout"
+
+# Output icon for polybar
+echo "$icon"

@@ -1,0 +1,14 @@
+font:
+  normal:
+    family: "Intone Mono Nerd Font"
+  bold:
+    family: "Intone Mono Nerd Font"
+  italic:
+    family: "Intone Mono Nerd Font"
+  size: 11.0
+  offset:
+    x: 0
+    y: 4
+  glyph_offset:
+    x: 0
+    y: 0

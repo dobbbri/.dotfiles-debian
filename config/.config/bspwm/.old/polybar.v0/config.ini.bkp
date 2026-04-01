@@ -1,0 +1,128 @@
+; https://github.com/polybar/polybar
+
+[colors]
+background-alt = #161616
+background = #000000
+foreground = #C5C8C6
+primary = #458588
+secondary = #52bdff
+
+info = "#458588"
+success = "#689d6a"
+warning = #DBC704
+urgent = "#fb4934"
+
+disabled = #4e5b55
+border = #0f2923
+
+
+[bar/example]
+width = 100%
+height = 20
+radius = 0
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+locale = pt_BR.UTF-8 
+
+border-size = 0
+border-color = ${colors.background}
+
+padding-left = 1
+padding-right = 1
+
+module-margin = 1
+
+separator = |
+separator-foreground = ${colors.disabled}
+
+font-0 = JetBrainsMono Nerd Font:size=11:weight=bold
+
+modules-left = xworkspaces
+modules-center = xwindow
+modules-right = memory battery 
+
+cursor-click = pointer
+; cursor-scroll = ns-resize
+
+enable-ipc = false
+
+;tray-position = right
+
+; wm-restack = generic
+; wm-restack = bspwm
+; wm-restack = i3
+
+; override-redirect = true
+
+[module/xworkspaces]
+type = internal/xworkspaces
+
+label-active = %name%
+label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.primary}
+label-active-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-background = ${colors.urgent}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.disabled}
+label-empty-padding = 1
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:75:...%
+
+[module/battery]
+type = internal/battery
+full-at = 99
+low-at = 10
+battery = BAT0
+adapter = ADP1
+poll-interval = 5
+
+format-charging-prefix = ""
+format-charging-prefix-foreground = ${colors.disabled}
+format-charging = <label-charging>
+format-charging-foreground = ${colors.foreground}
+
+format-full-prefix = "󰁹"
+format-full-prefix-foreground = ${colors.disabled}
+format-full = <label-full>
+format-full-foreground = ${colors.success}
+
+format-discharging-prefix = "󰁹"
+format-discharging-prefix-foreground = ${colors.disabled}
+format-discharging = <label-discharging>
+format-discharging-foreground = ${colors.foreground}
+
+label-charging = " %percentage%% "
+label-discharging =" %percentage%% "
+label-full = " %percentage%% "  
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "󰒋 "
+format-prefix-foreground = ${colors.disabled}
+label = %free%
+
+warn-percentage = 86
+format-warn = <label-warn>
+format-warn-foreground = ${colors.urgent}
+label-warn = %free%
+
+[settings]
+screenchange-reload = false
+pseudo-transparency = false
+
+; vim:ft=dosini

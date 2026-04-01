@@ -1,0 +1,10 @@
+
+sudo apt remove gvfs # se necessario reinstalar
+sudo apt remove pulseaudio # se necessario reinstalar
+
+#------------------------------------------------------------------
+
+sudo systemctl stop systemd-timesyncd && sudo systemctl disable systemd-timesyncd
+sudo systemctl stop acpi-fakekey.service && sudo systemctl disable acpi-fakekey.service
+sudo systemctl stop cron.service && sudo systemctl disable cron.service
+

@@ -1,0 +1,14 @@
+font:
+  normal:
+    family: "UbuntuSansMono Nerd Font"
+  bold:
+    family: "UbuntuSansMono Nerd Font"
+  italic:
+    family: "UbuntuSansMono Nerd Font"
+  size: 11.0
+  offset:
+    x: 0
+    y: 7
+  glyph_offset:
+    x: 0
+    y: 0

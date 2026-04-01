@@ -1,0 +1,178 @@
+# fix macbook wireless speed
+
+sudo apt update
+sudo apt remove broadcom-sta-dkms
+sudo apt install broadcom-sta-dkms
+sudo apt upgrade
+
+
+sudo dpkg-reconfigure keyboard-configuration
+# select us intl with dead keys
+
+sudo service keyboard-setup restart
+
+#in busen enviroment 
+geany .config/bunsen/enviroment
+# add
+export GTK_IM_MODULE=cedilla
+ 
+
+#set click with 2 fingers like mouse right button, disable conky and clipman
+geany .config/bunsen/autostart
+
+# and found the line 66:
+
+synclient VertEdgeScroll=1 HorizEdgeScroll=1 TapButton1=1 2>/dev/null
+
+# and updated it like so
+synclient VertEdgeScroll=1 HorizEdgeScroll=1 TapButton1=1 TapButton2=3 VertScrollDelta=-235 2>/dev/null
+
+## synclient VertEdgeScroll=1 HorizEdgeScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 ClickFinger2=3 ClickFinger3=2 HorizScrollDelta=-75 VertScrollDelta=-75 2>/dev/null
+
+# and found the line 99 comment like:
+    ## bl-conky-session &
+
+# and found the line 133 comment like:
+## xfce4-clipman &
+
+# and logout
+
+
+
+# instalar nodejs, npm e nvm
+sudo apt-get install --yes nodejs npm
+
+
+# instalar nvm
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+source ~/.bashrc
+nvm install --lts
+
+npm install -g pnpm
+pnpm -v
+
+
+
+# install neovim from image
+wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+sudo mkdir /usr/local/bin
+chmod u+x nvim.appimage
+sudo mv nvim.appimage /usr/local/bin/nvim
+
+sudo apt install python3 python3-pip golang rustc -y
+pip install neovim vim-vint
+npm i -g neovim tree-sitter
+
+ln -s ~/Dotfiles/nvim ~/.config/nvim
+nvim -v
+
+
+
+
+
+
+
+
+# baixar brave browser wezterm github-desktop
+sudo apt install curl wget
+
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+sudo curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+
+wget -qO - https://mirror.mwt.me/shiftkey-desktop/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/mwt-desktop.gpg > /dev/null
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/mwt-desktop.gpg] https://mirror.mwt.me/shiftkey-desktop/deb/ any main" > /etc/apt/sources.list.d/mwt-desktop.list'
+
+sudo apt update
+sudo apt install wezterm brave-browser github-desktop
+
+
+
+
+
+# na pagina https://wezfurlong.org/wezterm/install/linux.html#installing-on-ubuntu-and-debian-based-systems e baixar o .deb
+wget https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Debian11.deb
+sudo apt install -y ./wezterm-20230712-072601-f4abf8fd.Debian11.deb
+ln -s ~/Dotfiles/Linux/wezterm  ~/.config/wezterm
+wezterm --version
+
+
+# baixar github desktop .deb
+# na pagina https://github.com/shiftkey/desktop/releases e baixar o .deb
+wget https://github.com/shiftkey/desktop/releases/download/release-3.1.1-linux1/GitHubDesktop-linux-3.1.1-linux1.deb
+sudo apt install -y ./Downloads/GitHubDesktop-linux-3.1.1-linux1.deb
+
+
+# baixar bitwarden .deb
+na pagina de Downloads, clicar e, Desktop App Installation Guides,
+localizar o .deb
+https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=deb
+
+
+
+
+# Install Nerd fonts
+# Download or install the nerd fonts with the nerd fonts installer script. To install nerd fonts, run the following script.
+
+bash -c  "$(curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh)"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# install flatPack flathub
+sudo apt install flatpak
+
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# restart
+
+
+#install flatpak
+flatpak install flathub com.bitwarden.desktop
+flatpak install flathub io.github.shiftey.Desktop
+flatpak install flathub io.github.mimbrero.WhatsAppDesktop
+
+# flatpak run [progeam id]
+flatpak run io.github.mimbrero.WhatsAppDesktop
+
+# flatpak uninstall --delete-data [program id]
+flatpak uninstall --delete-data com.github.vikdevelop.photopea_ap
+
+# list all 
+flatpak list
+
+# remove unused
+flatpak uninstall --unused
+
+
+
+
+# install snap
+sudo apt update
+sudo apt install snapd
+sudo snap install core
+
+# install neovim
+sudo snap install nvim --classic
+
+# to list what program you have installed
+snap list
+
+# Run command
+snap run [program]
+
+

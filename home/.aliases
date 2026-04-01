@@ -1,0 +1,203 @@
+#!/bin/bash
+
+alias cal="ncal -b"
+
+# tree
+alias tree='tree -CAhF --dirsfirst'
+alias treed='tree -CAFd'
+
+alias font-cache='sudo fc-cache -f -v'
+
+# dotfiles
+alias ff='cd ~/.dotfiles/'
+alias sc='cd ~/.dotfiles/scripts/.config/scripts/'
+alias vv='cd ~/.dotfiles/vimbtw/.config/nvim/'
+
+# bspwm
+alias bsp='cd ~/.dotfiles/bspwm/.config/bspwm/'
+
+# suckless
+alias suc='cd ~/.dotfiles/suckless/.config/suckless/'
+alias sudw='cd ~/.dotfiles/suckless/.config/suckless/dwm/'
+alias susl='cd ~/.dotfiles/suckless/.config/suckless/slstatus/'
+alias surc='sudo rm config.h'
+alias smci='sudo make clean install'
+
+# burn iso
+alias burn-iso="sudo mintstick -m iso"
+alias format-usb="sudo mintstick -m format"
+
+# run http-server
+alias run-server="npx http-server "
+# site
+alias dd='cd ~/Dev/'
+alias ss='cd ~/Sites/'
+alias dl='cd ~/Downloads/'
+alias sepc='cd ~/Sites/epc_in_dev/'
+alias se='cd ~/Sites/elisa_pet_care_2025/'
+alias slepc='cd ~/Sites/elisa_pet_care_lp_2025/'
+alias sp='cd ~/Sites/pousada_do_tucunare_2020'
+alias sb='cd ~/Sites/blog'
+alias sv='cd ~/Sites/videira-blog-2025/'
+
+alias power-off="sudo systemctl poweroff"
+alias reboot="sudo systemctl reboot"
+alias fixx="sudo apt install brightnessctl && sudo brightnessctl --device='smc::kbd_backlight' set 30 && sudo brightnessctl --device='acpi_video0' set 2"
+
+# get all errors for running services using journalctl
+alias journal-errors="journalctl -p 3 -xb"
+
+alias x="exit"
+alias sx="startx"
+alias l='exa -ll --color=always --group-directories-first'
+alias ls='exa -al --header --icons --group-directories-first'
+alias lt='eza --tree --level=2 --long --icons --git --color=always --group-directories-first'
+alias grep='grep --color=auto'
+alias myip="ip -f inet address | grep inet | grep -v 'lo$' | cut -d ' ' -f 6,13 && curl ifconfig.me && echo ' external ip'"
+alias free='free -h'
+alias reload='source ~/.bashrc'
+
+# nvim
+alias v='nvim'
+alias e='nvim'
+alias lg='lazygit'
+
+# home
+alias hh='cd ~'
+
+open() {
+  xdg-open "$@" >/dev/null 2>&1 &
+}
+
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../../'
+
+# apt
+alias sai='sudo apt install'
+alias sas='sudo apt search'
+alias sar='sudo apt remove && sudo apt autoremove -yy'
+alias saa='sudo apt autoclean && sudo apt autoremove -yy'
+alias sauu='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoclean && sudo apt autoremove -y'
+
+# update node packages
+alias update-pkg="ncu --interactive --format group"
+
+# Git
+alias gsync="git pull && git push && git status --short"
+alias gps="git push && git status --short"
+alias gnah="git reset --hard && git clean -df"
+
+alias gaa="git add ."
+alias gs="git status --short"
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches"
+alias gc="git commit -m"
+alias gp="git push"
+alias gP="git pull"
+alias gac="git add . && git commit -m"
+alias gpp="git pull && git push"
+alias ggg="gac 'update...' && gps"
+
+gg() {
+  git add .
+  git commit -m "$1"
+  git push
+  git status --short
+}
+
+# npm
+alias nr="npm run"
+alias naf="npm audit fix"
+alias nrf="npm run fix"
+alias nrd="npm run dev"
+alias nrp="npm run preview"
+alias nrb="npm run build"
+alias nrs="npm run start"
+alias ni="npm install"
+alias nid="npm install --save-dev"
+alias nig="sudo npm install -g"
+alias nu="npm uninstall"
+alias nug="sudo npm uninstall -g"
+alias nlsg="npm ls -g"            # List installed packages
+alias nls="npm ls"                # List installed packages
+alias nlp="npm prune"             # Remove un-used packages from node_modules folder
+alias nup="npm update"            # Update all packages listed in package.json
+alias nrdup="npm dedupe"          # Remove duplicate packages from node_modules
+alias nclean="npm cache clean -f" # Clean npm cache
+
+#Clean cache
+alias clear-cache='rm -rf ~/.cache/*'
+
+#grub update
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+
+#alias os="onedrive --synchronize"
+
+alias neovim-clear-log="rm ~/.local/state/nvim/lsp.log"
+
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+neovim-update() {
+  echo "- Update Neovim nighly ---------------------------------------------"
+  sudo rm /usr/local/bin/nvim
+  wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
+  # wget https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.appimage
+  chmod u+x nvim-linux-x86_64.appimage
+  sudo mv nvim-linux-x86_64.appimage /usr/local/bin/nvim
+}
+
+neovim-clear() {
+  echo "- clean Neovim plugins, caches ... ---------------------------------------------"
+  rm -rf ~/.cache/nvim
+  rm -rf ~/.local/share/nvim
+  rm -rf ~/.local/state/nvim
+  rm ~/.config/nvim/nvim-pack-lock.json
+}
+
+neovim-install() {
+  neovim-clear
+  echo "- Install Neovim nighly ---------------------------------------------"
+  sudo rm /usr/local/bin/nvim
+  wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
+  # wget https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.appimage
+  chmod u+x nvim-linux-x86_64.appimage
+  sudo mv nvim-linux-x86_64.appimage /usr/local/bin/nvim
+}
+
+# installAppImage() {
+#   sudo rm /usr/local/bin/$2
+#   chmod u+x $1
+#   sudo mv $1 /usr/local/bin/$2
+# }
+
+wifi-up() {
+  #sudo cat /etc/network/interfaces
+  sudo ifdown wlp2s0b1
+  sudo ifup wlp2s0b1
+}
+
+extract() {
+	for archive in "$@"; do
+		if [ -f "$archive" ]; then
+			case $archive in
+			*.tar.bz2) tar xvjf $archive ;;
+			*.tar.gz) tar xvzf $archive ;;
+			*.bz2) bunzip2 $archive ;;
+			*.rar) rar x $archive ;;
+			*.gz) gunzip $archive ;;
+			*.tar) tar xvf $archive ;;
+			*.tbz2) tar xvjf $archive ;;
+			*.tgz) tar xvzf $archive ;;
+			*.zip) unzip $archive ;;
+			*.Z) uncompress $archive ;;
+			*.7z) 7z x $archive ;;
+			*) echo "don't know how to extract '$archive'..." ;;
+			esac
+		else
+			echo "'$archive' is not a valid file!"
+		fi
+	done
+}

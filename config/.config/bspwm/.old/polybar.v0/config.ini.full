@@ -1,0 +1,185 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background-alt = #161616
+background = #000000
+foreground = #C5C8C6
+primary = #458588
+secondary = #52bdff
+
+info = "#458588"
+success = "#689d6a"
+warning = #DBC704
+urgent = "#fb4934"
+
+disabled = #4e5b55
+border = #0f2923
+
+
+[bar/example]
+width = 100%
+height = 20
+radius = 0
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+locale = pt_BR.UTF-8 
+
+border-size = 0
+border-color = ${colors.background}
+
+padding-left = 1
+padding-right = 2
+
+module-margin = 1
+
+separator = |
+separator-foreground = ${colors.disabled}
+
+font-0 = JetBrainsMono Nerd Font:size=11:weight=bold
+
+modules-left = xworkspaces
+modules-center = xwindow
+modules-right = memory battery 
+; pulseaudio hour powermenu
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = false
+
+;tray-position = right
+
+; wm-restack = generic
+; wm-restack = bspwm
+; wm-restack = i3
+
+; override-redirect = true
+
+[module/xworkspaces]
+type = internal/xworkspaces
+
+label-active = %name%
+label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.primary}
+label-active-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-background = ${colors.urgent}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.disabled}
+label-empty-padding = 1
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:75:...%
+
+[module/battery]
+type = internal/battery
+full-at = 99
+low-at = 10
+battery = BAT0
+adapter = ADP1
+poll-interval = 5
+
+format-charging-prefix = ""
+format-charging-prefix-foreground = ${colors.disabled}
+format-charging = <label-charging>
+format-charging-foreground = ${colors.foreground}
+
+format-full-prefix = "󰁹"
+format-full-prefix-foreground = ${colors.disabled}
+format-full = <label-full>
+format-full-foreground = ${colors.success}
+
+format-discharging-prefix = "󰁹"
+format-discharging-prefix-foreground = ${colors.disabled}
+format-discharging = <label-discharging>
+format-discharging-foreground = ${colors.foreground}
+
+label-charging = " %percentage%% "
+label-discharging =" %percentage%% "
+label-full = " %percentage%% "  
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume-prefix = "󰕾 "
+format-volume-prefix-foreground = ${colors.disabled}
+format-volume = <label-volume>
+label-volume = %percentage%%
+label-muted = muted
+label-muted-foreground = ${colors.disabled}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "󰒋 "
+format-prefix-foreground = ${colors.disabled}
+label = %free%
+
+warn-percentage = 86
+format-warn = <label-warn>
+format-warn-background = ${colors.urgent}
+format-warn-prefix-background = ${colors.urgent}
+; format-warn-foreground = ${colors.urgent}
+; format-warn-prefix = "󱇎 󱇎 󱇎 󱇎 󱇎 󱇎 "
+; format-warn-prefix-foreground = ${colors.urgent}
+label-warn = %free%
+
+[module/hour]
+type = custom/script
+interval = 5
+label-foreground = ${colors.disabled}
+format = <label>
+exec = "LC_TIME="pt_br_utf8" date +"%H:%M""
+label-padding = 0
+label-font = 1
+click-left = gsimplecal
+
+[module/powermenu]
+type = custom/menu
+expand-right = true
+format-spacing = 1
+label-open = ""
+label-open-foreground = ${colors.urgent}
+label-close = "󱎘 Cancel"
+label-close-foreground = ${colors.success}
+label-separator = |
+label-separator-foreground = ${colors.foreground}
+menu-0-0 = " Reboot"
+menu-0-0-exec = systemctl reboot
+menu-0-0-foreground = ${colors.urgent}
+menu-0-1 = " Power Off"
+menu-0-1-exec = systemctl poweroff
+menu-0-1-foreground = ${colors.urgent}
+
+[settings]
+screenchange-reload = false
+pseudo-transparency = false
+
+; vim:ft=dosini
